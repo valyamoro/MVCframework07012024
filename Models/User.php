@@ -9,6 +9,7 @@ class User extends Model
 {
     const TABLE_NAME = 'users3';
 
+    public string $id;
     public string $email;
     public string $firstName;
     public string $lastName;
@@ -27,6 +28,16 @@ class User extends Model
         ]);
 
         return (bool)$sth->rowCount();
+    }
+
+    public function getPasswordByEmail(string $email): array
+    {
+        $query = 'SELECT password FROM ' . static::TABLE_NAME . ' WHERE email=?';
+
+        $sth = $this->connectionDB()->prepare($query);
+        $sth->execute([$email]);
+
+        return $sth->fetch();
     }
 
 }
