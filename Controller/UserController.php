@@ -3,17 +3,17 @@
 namespace app\Controller;
 
 use app\Core\Controller;
+use app\Models\User;
 
 class UserController extends Controller
 {
-    public function add(array $data): string
+    public static function registry(array $data): bool
     {
-        return 'user add ' . "{$data['user']['id']}, {$data['user']['data']}";
-    }
+        $user = new User(parent::$PDOConnection);
 
-    public function edit(int $id): string
-    {
-        return 'user edit id: ' . $id;
+        $user->loadData($data);
+
+        return $user->add();
     }
 
 }
