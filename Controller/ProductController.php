@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index(): string
     {
-        $product = new Product($this->PDOConnection);
+        $product = new Product(self::$PDOConnection);
         print_r($product->getAll());
     }
 
