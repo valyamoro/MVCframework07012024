@@ -36,7 +36,8 @@ class Router
                     $method = 'index';
                 }
             } elseif (\count($segments) === 2) {
-                $method = $segments[1];
+                $method = 'render';
+                $params = [$segments[1], $segments[1]];
             } elseif (\count($segments) === 3) {
                 $params = $segments[2];
                 $method = $segments[1];
@@ -45,7 +46,7 @@ class Router
 
         $controller = new $class();
 
-        echo $controller->{$method}(...[$params] ?? null);
+        echo $controller->{$method}(...$params ?? null);
     }
 
 }
